@@ -27,9 +27,14 @@ $chat_id = $update['message']['chat']['id'] ?? null;
 $text    = trim($update['message']['text'] ?? '');
 $name    = $update['message']['chat']['first_name'] ?? 'دوست عزیز';
 
-// پاسخ به دستور استارت
+// پاسخ به دستور استارت (/start)
 if ($text === '/start') {
     $reply = "سلام {$name}! خوش آمدید.";
+    sendMessage($chat_id, $reply);
+}
+// پاسخ به دستور راهنما (/help)
+elseif ($text === '/help') {
+    $reply = "⚠️ این بخش هنوز کامل نشده است.";
     sendMessage($chat_id, $reply);
 }
 
