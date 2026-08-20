@@ -16,7 +16,7 @@ define('REPORT_CHANNEL_ID', -1004404140546);
 define('DATA_CHAT_CHANNEL_ID', -1004427769925);
 
 // مسیر ذخیره‌سازی دیتابیس جیسون
-define('DB_FILE', __DIR__ . '/data.json');
+define('DB_FILE', __DIR__ . '/storage/data.json');
 
 // وضعیت‌های عمومی نشست‌ها
 define('STATE_IDLE', 'idle');
