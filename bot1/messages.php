@@ -188,6 +188,46 @@ function handleMessage($message, &$data) {
     return;
   }
 
+  if ($username === "Owner" && $state === "owner_panel" && $text === "سطح لول ها") {
+    $userList = [];
+    foreach ($data['users'] as $u => $val) {
+      if ($u === "Owner") continue;
+      $userList[] = [
+        'username' => $u,
+        'level' => $val['level'] ?? 1,
+        'level_xp' => $val['level_xp'] ?? 0,
+        'created_timestamp' => $val['created_timestamp'] ?? 0
+      ];
+    }
+
+    usort($userList, function($a, $b) {
+      if ($b['level'] !== $a['level']) {
+        return $b['level'] - $a['level'];
+      }
+      if ($b['level_xp'] !== $a['level_xp']) {
+        return $b['level_xp'] - $a['level_xp'];
+      }
+      return $a['created_timestamp'] - $b['created_timestamp'];
+    });
+
+    $top10 = array_slice($userList, 0, 10);
+    $msg = "⭐ لیست ۱۰ نفر برتر بر اساس سطح لول :\n\n";
+    if (empty($top10)) {
+      $msg .= "هیچ بازیکنی ثبت نشده است.";
+    } else {
+      foreach ($top10 as $idx => $item) {
+        $rankNum = $idx + 1;
+        $msg .= "{$rankNum}. {$item['username']} | لول: " . formatNumber($item['level']) . " (XP: " . formatNumber($item['level_xp']) . ")\n";
+      }
+    }
+
+    tgCall("sendMessage", [
+      'chat_id' => $chatId,
+      'text' => $msg
+    ]);
+    return;
+  }
+
   if ($username === "Owner" && $state === "owner_panel" && $text === "ساخت کد هدیه") {
     $data['user_states'][$chatId] = "STATE_OWNER_GIFT_ITEM_COUNT";
     $data['temp_data'][$chatId] = [];
