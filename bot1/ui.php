@@ -32,7 +32,8 @@ function getOwnerKeyboard() {
       [['text' => "حذف حساب کاربران"], ['text' => "انتقال منابع نامحدود"]],
       [['text' => "ساخت کد هدیه"], ['text' => "مشاهده هدیه ها"]],
       [['text' => "ساخت چالش"], ['text' => "مشاهده چالش ها"]],
-      [['text' => "ban time"], ['text' => "ban"], ['text' => "un ban"]],
+      [['text' => "سطح لول ها"], ['text' => "ban time"]],
+      [['text' => "ban"], ['text' => "un ban"]],
       [['text' => "خروج از حساب"]]
     ],
     'resize_keyboard' => true
